@@ -1,0 +1,36 @@
+{
+  "downloadUrl": "https://broker.mdm-portal.de/BASt-MDM-Interface/srv/3785001/clientPullService?subscriptionID=3785001",
+  "downloadCert": "$DPC_MDM_CERT",
+  "fileType": "xml",
+  "ld+json": {
+    "@context": "http://schema.org",
+    "@type": "Dataset",
+    "name": "Parkdaten statisch Wuppertal",
+    "description": "Parkdaten aus dem Stadtgebiet Wuppertal, Parkquartiere Wuppertal Barmen und Wuppertal Elberfeld ( Quelle Parkleitsystem / Parkinfosystem)",
+    "sameAs": "https://service.mdm-portal.de/mdm-portal-application/publDetail.do?publicationId=2025002",
+    "keywords": [
+      "DATEXII",
+      "Parkdaten",
+      "Mobility"
+    ],
+    "creator": {
+      "@type": "Organization",
+      "name": "Stadt Wuppertal"
+    },
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": "Stadt Wuppertal",
+      "geo": {
+        "@type": "GeoShape",
+        "box": "6.9859 51.1570 7.3416 51.3263"
+      }
+    },
+    "distribution": [
+      {
+        "@type":"DataDownload",
+        "name": "Datensatz",
+        "contentUrl": "body.xml",
+        "encodingFormat": "text/xml"
+      }]
+    }
+}

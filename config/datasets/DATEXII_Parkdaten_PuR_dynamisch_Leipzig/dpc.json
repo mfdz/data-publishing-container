@@ -1,0 +1,39 @@
+{
+  "downloadUrl": "https://broker.mdm-portal.de/BASt-MDM-Interface/srv/3796000/clientPullService?subscriptionID=3796000",
+  "downloadCert": "$DPC_MDM_CERT",
+  "fileType": "xml",
+  "schematron": "config/schemas/DATEXII_MDM_Parkdaten.sch",
+  "ld+json": {
+    "@context": "http://schema.org",
+    "@type": "Dataset",
+    "name": "Parkdaten dynamisch P+R Leipzig",
+    "description": "Dynamische Parkdaten der Park & Ride Anlagen in Leipzig",
+    "sameAs": "https://service.mdm-portal.de/mdm-portal-application/publDetail.do?publicationId=2902001",
+    "keywords": [
+      "DATEXII",
+      "Parkdaten",
+      "Mobility"
+    ],
+    "creator": {
+      "@type": "Organization",
+      "name": "Stadt Leipzig"
+    },
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": "Stadt Leipzig",
+      "geo": {
+        "@type": "GeoShape",
+        "box": "12.1639 51.2331 12.6151 51.4532"
+      }
+    },
+    "distribution": [
+      {
+        "@type":"DataDownload",
+        "name": "Datensatz",
+        "contentUrl": "body.xml",
+        "encodingFormat": "text/xml"
+      }],
+    "license": "https://www.govdata.de/dl-de/by-2-0",
+    "creditText": "© Stadt Leipzig, Verkehrs- und Tiefbauamt, <a href='https://www.govdata.de/dl-de/by-2-0'>Datenlizenz Deutschland –Namensnennung- Version 2.0</a> (MDM ID 2902001)"
+    }
+}

@@ -1,0 +1,16 @@
+<div class="control">
+  <div class="tags has-addons">
+    <span class="tag is-dark">Lizenz</span>
+    {% if ld.license %}
+    	<span class="tag is-info"><a style="border-bottom: 0; color: #fff" href="{{ld.license}}">
+    	{% if ld.license == 'https://www.govdata.de/dl-de/by-2-0' %}
+    		dl-de-by-2.0
+    	{% else %}
+    		{{ld.license}}
+    	{% endif %}
+    	</a></span>
+    {% else %}
+    	<span class="tag is-danger">Unbekannt</span>
+    {% endif %} 	
+  </div>
+</div>

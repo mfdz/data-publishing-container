@@ -1,0 +1,39 @@
+{
+  "downloadUrl": "https://broker.mdm-portal.de/BASt-MDM-Interface/srv/3791000/clientPullService?subscriptionID=3791000",
+  "downloadCert": "$DPC_MDM_CERT",
+  "fileType": "xml",
+  "schematron": "config/schemas/DATEXII_MDM_Parkdaten.sch",
+  "ld+json": {
+    "@context": "http://schema.org",
+    "@type": "Dataset",
+    "name": "Parkdaten dynamisch Stuttgart",
+    "description": "Dynamische Parkplatzbelegungen aller im Parkleitsystem der Landeshauptstadt Stuttgart enthaltenen Parkhäuser. System befindet sich im Aufbau, Datensätze sind noch nicht vollständig. ",
+    "sameAs": "https://service.mdm-portal.de/mdm-portal-application/publDetail.do?publicationId=3059001",
+    "keywords": [
+      "DATEXII",
+      "Parkdaten",
+      "Mobility"
+    ],
+    "creator": {
+      "@type": "Organization",
+      "name": "Landeshauptstadt Stuttgart"
+    },
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": "Stadt Stuttgart",
+      "geo": {
+        "@type": "GeoShape",
+        "box": "9.0301 48.7018 9.3549 48.8541"
+      }
+    },
+    "distribution": [
+      {
+        "@type":"DataDownload",
+        "name": "Datensatz",
+        "contentUrl": "body.xml",
+        "encodingFormat": "text/xml"
+      }],
+    "license": "https://www.govdata.de/dl-de/by-2-0",
+    "creditText": "© Landeshauptstadt Stuttgart, Tiefbauamt, <a href='https://www.govdata.de/dl-de/by-2-0'>Datenlizenz Deutschland –Namensnennung- Version 2.0</a> (MDM ID 3059001)"
+  }
+}

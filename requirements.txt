@@ -1,0 +1,4 @@
+doit==0.33.1
+Jinja2==2.11.2
+lxml==4.6.2
+schedule==0.6.0

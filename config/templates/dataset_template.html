@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ ld.description }}" />
+    <link rel="shortcut icon" type="image/png" href="/img/favicon.ico"/>
+    <script type="application/ld+json">{{ ld | tojson }}</script>
+
+     <!-- OPENGRAPH -->
+    <meta content="MITFAHR|DE|ZENTRALE" property="og:title">
+    <meta content="https://mfdz.de/media/site/2954417654-1603810793/ogimage.jpg" property="og:image">
+    <meta content="1200" property="og:image:width">
+    <meta content="630" property="og:image:height">
+    <meta content="MITFAHR|DE|ZENTRALE" property="og:site_name">
+    <meta content="MITFAHR|DE|ZENTRALE Datensatz {{ ld.name }}" property="og:description">
+    <meta content="MITFAHR|DE|ZENTRALE" property="article:author">
+      
+    <!-- SEO -->
+    <meta content="MITFAHR|DE|ZENTRALE" name="author">
+    <meta content="MITFAHR|DE|ZENTRALE Datensatz {{ ld.name }}" name="description">
+    <meta content="index, follow, noodp" name="robots">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://mfdz.de/media/site/3434498041-1603810793/apple-touch-icon-180-180.png">
+      <!-- TWITTER -->
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mfdz_de">
+    <meta name="twitter:creator" content="@mfdz_de">
+
+    <meta content="MITFAHR|DE|ZENTRALE" property="twitter:title">
+    <meta content="https://mfdz.de/media/site/2954417654-1603810793/ogimage.jpg" property="twitter:image">
+    <meta content="MITFAHR|DE|ZENTRALE Datensatz {{ ld.name }}" property="twitter:description">
+
+    <link href="https://mfdz.de/assets/css/bulma.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://mfdz.de/assets/css/lity.min.css" rel="stylesheet">
+    <link href="https://mfdz.de/assets/css/slick.css" rel="stylesheet">
+    <link href="https://mfdz.de/assets/css/index.css" rel="stylesheet">
+    <link href="https://mfdz.de/assets/css/templates/default.css" rel="stylesheet">
+      
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.mfdz.de",
+      "logo": "https://www.mfdz.de/media/site/3434498041-1603810793/apple-touch-icon-180-180.png"
+    }
+    </script>
+
+    <title>MFDZ - DPC - {{ ld.name }}</title>
+	</head>
+	<body>
+  {% include "includes/header.html" %}
+
+<main role="main">
+  <section class="section module-text-section">
+    <div class="container">
+      <div class="columns is-multiline is-centered">
+        <div class="column is-8 content module-title has-text-centered">
+            <h1 class="title">{{ ld.name }}</h1>
+        </div>
+
+        <div class="column is-8 content">
+          <div class="field is-grouped is-grouped-multiline">
+            {% include "includes/license_badge.html" %}
+            <!-- TODO: last update -->
+            <!-- TODO: size -->
+            <!-- TODO: validation errors -->
+          </div>
+        </div>
+        <div class="column is-8 content">
+          <p>{{ ld.description }}<p>
+      		<p>Erstellt durch {{ld.creator.name or 'Unbekannt' }}</p>
+    		  <ul class="tag-list">{% for keyword in ld.keywords %}
+              <li class="tag is-rounded">{{ keyword }}</li>
+            {% endfor %}</ul>
+          
+    		  <h3>Download-Optionen</h3>
+    		  <div>
+      			<ul>{% for download in ld.distribution %}
+      			<li><a href="{{ download.contentUrl }}">Datensatz</a> ({{download.encodingFormat}})</li>
+      			{% endfor %}<li><a href="ld.json" title="JSON-LD Datenbeschreibung">Metadaten</a><img width="32" src="https://json-ld.org/images/json-ld-data-32.png" alt="JSON-LD-logo-32"/></li>
+          </ul>
+    		  </div>
+      		
+          <h3>Nutzungsbedingungen</h3>
+      		<div>Lizenz: {{ ld.license or 'Unbekannt'}}<br/>
+      			Quellenvermerk: {{ ld.creditText or 'Keine Angabe' }}
+      		</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+  {% include "includes/footer.html" %}
+	</body>
+</html>

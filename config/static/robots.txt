@@ -1,0 +1,1 @@
+Sitemap: http://data.mfdz.de/sitemap.txt
