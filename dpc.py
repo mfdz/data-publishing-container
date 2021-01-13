@@ -11,7 +11,7 @@ def run_doit():
 # and probably parallelize downloads so that large downloads don't impact frequent quick ones
 # And we might skip valdations for frequently updated datasets.
 # Perhaps we should only schedule downloads and let doit watch handle subsequent tasks
-schedule.every(10).seconds.do(run_doit)
+schedule.every(30).seconds.do(run_doit)
 
     
 while True:
