@@ -16,10 +16,9 @@ So, just putting data on the organisation's website ignores that the data should
 We propose a solution which adresses the above cited problems, though being as simple as possible: data publishing containers.
 As a data publishing container, we understand a container that at least
 
-* provides an http-server giving acess to a folder hierarchy
-* every dataset is represented by a folder, containing it's data, metadata, and optionally different representations or validation reports.
+* provides an http-server giving access to a folder hierarchy
+* every dataset is represented by a folder, containing it's data, metadata, and optionally different representations or validation reports and a datapackage.json which groups these resources.
 * every dataset folder serves an index document describing the dataset for humans and  - via a linked data description - for indexing crawlers of search engines as well.
-* every dataset folder serves the dataset via a file named body.ext where ext represents it's format (like .csv, .xml, .json, .gtfs.zip).
 
 
 ### Beyond the FAIR principles: Commentability and Validatability

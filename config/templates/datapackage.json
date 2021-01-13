@@ -1,0 +1,27 @@
+{
+  "description": "{{ld.description}}",
+  "image": "{{ld.image}}",
+  "keywords": [
+    {% for keyword in ld.keywords %}"{{ keyword }}"{{ "," if not loop.last }}{% endfor %}
+  ],
+  "licenses": [
+    {
+     "path": "{{ld.license}}"
+    }
+  ],
+  "name": "{{ld.datapackageName}}",
+  "resources": [
+    {
+      "name": "{{ld.datapackageName}}",
+      "path": "body.{{ld.format}}" 
+    }
+  ],
+  "sources": [
+    {
+      "path": "{{ld.sameAs}}",
+      "title": "{{ld.name}}"
+    }
+  ],
+  "title": "{{ld.name}}",
+  "homepage": "{{ld.landingPage}}"
+}

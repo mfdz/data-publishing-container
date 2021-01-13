@@ -8,6 +8,7 @@ DOIT_CONFIG = {
 DPC_CONFIG = {
     'host': 'data.mfdz.de',
     'dataset_template': 'config/templates/dataset_template.html',
+    'datapackage_template': 'config/templates/datapackage.json',
     'out_dir': 'out/',
     'dataset_definitions_dir': 'config/datasets/' 
 }
@@ -18,17 +19,18 @@ def task_copy_static_files():
             'actions': ['mkdir -p {0} && cp -rf config/static/* {0}'.format(DPC_CONFIG['out_dir'])],
         }
 
-def task_render_index_page():
+def task_render_landing_page():
     '''render index.html page for datasets'''
     for (dataset_name, dpc_file) in dpc_files(DPC_CONFIG['dataset_definitions_dir']+'**/dpc.json'):
         dst_file = DPC_CONFIG['out_dir'] + dataset_name + '/index.html'
         ld_file = DPC_CONFIG['out_dir'] + dataset_name + '/ld.json'
+        datapackage_file = DPC_CONFIG['out_dir'] + dataset_name + '/datapackage.json'
         
         yield {
             'name': dataset_name,
-            'file_dep': [dpc_file, DPC_CONFIG['dataset_template']],
-            'targets': [dst_file],
-            'actions': [(render_index_page, [dpc_file, dst_file, ld_file])],
+            'file_dep': [dpc_file, DPC_CONFIG['dataset_template'], DPC_CONFIG['datapackage_template']],
+            'targets': [dst_file, ld_file, datapackage_file],
+            'actions': [(render_index_page, [dpc_file, dst_file, ld_file, datapackage_file, dataset_name, DPC_CONFIG])],
         }
 
 def task_render_index():
@@ -40,6 +42,7 @@ def task_render_index():
         'targets': [SITEMAP, INDEX],
         'actions': [(render_index, [DPC_CONFIG['dataset_definitions_dir'], DPC_CONFIG['host'], INDEX, SITEMAP])],
     }
+
 
 def task_download_mdm_dataset():
     for (dataset_name, download_url, cert, file_type) in download_links(DPC_CONFIG['dataset_definitions_dir']+'**/dpc.json'):
