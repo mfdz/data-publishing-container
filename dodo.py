@@ -48,7 +48,7 @@ def task_download_mdm_dataset():
     for (dataset_name, download_url, cert, file_type) in download_links(DPC_CONFIG['dataset_definitions_dir']+'**/dpc.json'):
         dst_file = DPC_CONFIG['out_dir'] + dataset_name + '/body.' + file_type
 
-        action = 'curl  -z {targets} -o {targets} --create-dirs -R --compressed '
+        action = 'curl -fsS -z {targets} -o {targets} --create-dirs -R --compressed '
         if cert:
             action = action + '--cert ' + cert
         yield {
