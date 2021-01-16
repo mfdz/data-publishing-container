@@ -5,6 +5,7 @@ from lxml import etree
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from .schemavalidator import validate_XML
 from lxml.isoschematron import Schematron
+import jsonlines
 
 env = Environment(
     loader=FileSystemLoader('config/templates'),
@@ -41,6 +42,11 @@ def datasets_with_schematron_validation(pattern):
             data = json.load(fc)
             if data.get('fileType')=='xml' and data.get('schematron'):
                 yield (dataset_name, data['schematron'])
+
+def datasets_out_files(pattern, outdir, out_file_pattern):
+    for (dataset_name, dpc_file) in dpc_files(pattern):
+        LIST = glob.glob(outdir + dataset_name + "/" + out_file_pattern)
+        yield (dataset_name, LIST)
 
 def _format_for(encodingFormat):
     # FIXME this is temporary and should be replaced, e.g. by using datapackage's format metainfo
@@ -84,14 +90,17 @@ def render_index(basedir, dpc_host, index_file, sitemap_file):
         fh.write(rendered_template)
  
 # TODO include validation result ()
-def render_index_page(dpc_file, dst_file, ld_file, datapackage_file, dataset_name, DPC_CONFIG):
+def render_landing_page(dpc_file, dst_file, ld_file, datapackage_file, dataset_name, validation_results_file, DPC_CONFIG):
     '''Render the dataset index page using metadata from supplied dpc file'''
     # Open template file
     template = env.get_template('dataset_template.html')
     ld = _load_linked_data(dpc_file)
+
+    size = os.path.getsize(validation_results_file)
+    validation_ok = True if os.path.getsize(validation_results_file) == 0 else False
     
     # render template with ld supplied as params
-    rendered_template = template.render(ld = ld)
+    rendered_template = template.render(ld = ld, validation_ok = validation_ok, size = size)
 
     datapackage_template = env.get_template('datapackage.json')
     dataset = _enhanced_linked_data(ld, dataset_name, DPC_CONFIG['host'])
@@ -109,10 +118,19 @@ def render_index_page(dpc_file, dst_file, ld_file, datapackage_file, dataset_nam
 
 def validate_xml(xml_file, dst_file):
     doc = etree.parse(xml_file)
-    schema = validate_XML(doc)
-    with open(dst_file, 'w') as fh:
+
+    with jsonlines.open(dst_file, mode='w') as writer:
+        schema = validate_XML(doc)
         for error in schema.error_log:
-            fh.write(f'{error}\n')
+            error_dict = {
+                'line': error.line, 
+                'column': error.column,
+                'level': error.level_name,
+                'message': error.message,
+                'domain_name': error.domain_name,
+                'type_name': error.type_name
+            }
+            writer.write(error_dict)
 
 def validate_xml_via_schematron(xml_file, schema_file, dst_file):
     schematron = Schematron(file = schema_file,
@@ -122,13 +140,42 @@ def validate_xml_via_schematron(xml_file, schema_file, dst_file):
 
     ns = {'svrl': 'http://purl.oclc.org/dsdl/svrl'}
 
-    with open(dst_file, 'w') as fh:
+    with jsonlines.open(dst_file, mode='w') as writer:
         for error in schematron.error_log:
             msg_xml = etree.fromstring(error.message)
             message = msg_xml.find('svrl:text', ns).text if msg_xml.find('svrl:text', ns) is not None else None
-            fh.write(u'%s:%d:%d:%s:%s:%s: %s\n' % (
-                error.filename, error.line, error.column, error.level_name,
-                error.domain_name, error.type_name, message))
-            
+
+            error_dict = {
+                'line': error.line, 
+                'column': error.column,
+                'level': error.level_name,
+                'message': message,
+                'domain_name': error.domain_name,
+                'type_name': error.type_name
+            }
+            writer.write(error_dict)
+   
+def merge_validation_results(validation_files, dst_file):
+    with open(dst_file, 'w') as fh:
+        for in_file in validation_files:
+            print('render '+in_file)
+            # read row by row, collect only n samples of same category and count rest, write them out as result file
+            with open(in_file, 'r') as rh:
+                for line in rh:
+                    # TODO here we should do some counting...
+                    fh.write(line) 
+
+def render_validation_results(results_file, dpc_file, dst_file):
+    template = env.get_template('validation_results_template.html')
+
+    ld = _load_linked_data(dpc_file)
+    
+    with open(results_file, 'r', encoding='utf-8') as rh:
+        data = jsonlines.Reader(rh).iter(type=dict, skip_invalid=True)
+        rendered_template = template.render(errors = data, ld = ld)
+
+        with open(dst_file, 'w') as fh:
+            fh.write(rendered_template) 
+
 
     

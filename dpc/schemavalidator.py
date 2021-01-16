@@ -27,15 +27,17 @@ attributeFormDefault="unqualified">
 </xs:schema>"""
 
 
-def validate_XML(tree):
+def validate_XML(tree, namespaces = None):
     """Validate an XML file represented as tree. Follow all schemaLocations.
     :param tree: 
     :type tree: ElementTree
     """
     
     schema_tree = etree.XML(SCHEMA_TEMPLATE)
-    # Find all unique instances of 'xsi:schemaLocation="<namespace> <path-to-schema.xsd> ..."'
-    schema_locations = set(tree.xpath("//*/@xsi:schemaLocation", namespaces={'xsi': XSI}))
+
+    # Find all unique instances of 'xsi:schemaLocation="<namespace> <path-to-schema.xsd> ..."'    
+    schema_locations = namespaces if namespaces else set(tree.xpath("//*/@xsi:schemaLocation", namespaces={'xsi': XSI}))
+     
     for schema_location in schema_locations:
         # Split namespaces and schema locations ; use strip to remove leading
         # and trailing whitespace.
@@ -46,7 +48,7 @@ def validate_XML(tree):
             xs_import.attrib['namespace'] = namespace
             xs_import.attrib['schemaLocation'] = location
             schema_tree.append(xs_import)
-    # Contstruct the schema
+    # Construct the schema
     schema = etree.XMLSchema(schema_tree)
     # Validate!
     schema.validate(tree)

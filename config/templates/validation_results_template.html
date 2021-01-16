@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ ld.description }}" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
-    <script type="application/ld+json">{{ ld | tojson }}</script>
-
      <!-- OPENGRAPH -->
     <meta content="MITFAHR|DE|ZENTRALE" property="og:title">
     <meta content="https://data.mfdz.de/img/data.jpg" property="og:image">
@@ -47,7 +45,7 @@
     }
     </script>
 
-    <title>MFDZ - DPC - {{ ld.name }}</title>
+    <title>MFDZ - DPC - Validierungsergebnisse {{ ld.name }}</title>
   </head>
   <body>
   {% include "includes/header.html" %}
@@ -57,37 +55,19 @@
     <div class="container">
       <div class="columns is-multiline is-centered">
         <div class="column is-8 content module-title has-text-centered">
-            <h1 class="title">{{ ld.name }}</h1>
+            <h1 class="title">Validierungsergebnisse Datensatz {{ ld.name }}</h1>
         </div>
 
+        
         <div class="column is-8 content">
-          <div class="field is-grouped is-grouped-multiline">
-            {% include "includes/license_badge.html" %}
-            {% include "includes/validation_badge.html" %}
-            <!--% include "includes/size_badge.html" %-->
-            <!-- TODO: last update -->
-          </div>
-        </div>
-        <div class="column is-8 content">
-          <p>{{ ld.description }}<p>
-          <p>Erstellt durch {{ld.creator.name or 'Unbekannt' }}</p>
-          <ul class="tag-list">{% for keyword in ld.keywords %}
-              <li class="tag is-rounded">{{ keyword }}</li>
-            {% endfor %}</ul>
-          
-          <h3>Download-Optionen</h3>
-          <div>
-            <ul>{% for download in ld.distribution %}
-            <li><a href="{{ download.contentUrl }}">Datensatz</a> ({{download.encodingFormat}})</li>
-            {% endfor %}<li><a href="ld.json" title="JSON-LD Datenbeschreibung">Metadaten</a><img width="32" src="https://json-ld.org/images/json-ld-data-32.png" alt="JSON-LD-logo-32"/></li>
-            <li><a href="datapackage.json" title="Datapackage Datenbeschreibung">datapackage.json</a></li>
-          </ul>
-          </div>
-          
-          <h3>Nutzungsbedingungen</h3>
-          <div>Lizenz: {{ ld.license or 'Unbekannt'}}<br/>
-            Quellenvermerk: {{ ld.creditText or 'Keine Angabe' }}
-          </div>
+          <table>
+            <thead><th>Validator</th><th>Beschreibung</th></thead>
+            <tbody>
+              {% for error in errors %}
+              <tr><td>{{error.domain_name}}</td><td>{{error.message}}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

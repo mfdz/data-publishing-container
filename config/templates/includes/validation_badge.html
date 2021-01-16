@@ -1,0 +1,10 @@
+<div class="control">
+  <div class="tags has-addons">
+    <span class="tag is-dark">Validierung</span>
+    {% if validation_ok %}
+    	<span class="tag is-success">erfolgreich</span>
+    {% else %}
+    	<span class="tag is-danger"><a style="border-bottom: 0; color: #fff" href="validation_results.html">Fehler</a></span>
+    {% endif %} 	
+  </div>
+</div>
