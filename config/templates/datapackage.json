@@ -6,7 +6,8 @@
   ],
   "licenses": [
     {
-     "path": "{{ld.license}}"
+      "path": "{{ld.license}}"{%if ld.creditText %},
+      "attributionText": "{{ld.creditText}}"{% endif %}
     }
   ],
   "name": "{{ld.datapackageName}}",
