@@ -2,7 +2,8 @@ import glob
 import dpc.tasks as tasks
 
 DOIT_CONFIG = {
-    'action_string_formatting': 'new'
+    'action_string_formatting': 'new',
+    'check_file_uptodate': 'timestamp'
 }
 
 DPC_CONFIG = {
