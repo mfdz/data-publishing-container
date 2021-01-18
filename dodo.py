@@ -1,5 +1,6 @@
 import glob
 import dpc.tasks as tasks
+from doit import create_after
 
 DOIT_CONFIG = {
     'action_string_formatting': 'new',
@@ -73,10 +74,11 @@ def task_validate_xml_using_schematron():
             'actions': [(tasks.validate_xml_via_schematron, (body_file, schematron_file, dst_file))]
         }
 
+@create_after(executed='validate_xml', target_regex='.*/validation_results.jsonl')
+@create_after(executed='validate_xml_using_schematron', target_regex='.*/validation_results.jsonl')
 def task_merge_validation_results():
     for (dataset_name, validation_files) in tasks.datasets_out_files(DPC_CONFIG['dataset_definitions_dir']+'**/dpc.json', DPC_CONFIG['out_dir'], 'validation_results.*.jsonl'):
         dst_file = DPC_CONFIG['out_dir'] + dataset_name + '/validation_results.jsonl'
-        
         yield {
             'name': dataset_name,
             'file_dep': validation_files,
