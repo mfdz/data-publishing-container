@@ -28,12 +28,16 @@ def _replace_env_vars(value):
     if value and value.startswith('$DPC_'):
         return os.environ.get(value[1:])
 
-def download_links(pattern):
+def dpcs(pattern):
     for (dataset_name, dpc_file) in dpc_files(pattern):
         # open dpc file
         with open(dpc_file, encoding='utf-8') as fc:
             data = json.load(fc)
-            yield (dataset_name, data['downloadUrl'], data.get('downloadCert'), data['fileType'])
+            yield (dataset_name, data)
+    
+def download_links(pattern):
+    for (dataset_name, data) in dpcs(pattern):
+        yield (dataset_name, data['downloadUrl'], data.get('downloadCert'), data['fileType'])
 
 def datasets_with_schematron_validation(pattern):
     for (dataset_name, dpc_file) in dpc_files(pattern):
@@ -115,14 +119,8 @@ def render_landing_page(dpc_file, dst_file, ld_file, datapackage_file, dataset_n
     with open(datapackage_file, 'w') as fh:
         fh.write(rendered_dp_template)
 
-
-def validate_xml(xml_file, dst_file):
-    doc = etree.parse(xml_file)
-
-    with jsonlines.open(dst_file, mode='w') as writer:
-        schema = validate_XML(doc)
-        for error in schema.error_log:
-            error_dict = {
+def _as_error_dict(error):
+    return {
                 'line': error.line, 
                 'column': error.column,
                 'level': error.level_name,
@@ -130,7 +128,20 @@ def validate_xml(xml_file, dst_file):
                 'domain_name': error.domain_name,
                 'type_name': error.type_name
             }
-            writer.write(error_dict)
+
+def validate_xml(xml_file, fallback_schema, dst_file):
+    doc = etree.parse(xml_file)
+
+    with jsonlines.open(dst_file, mode='w') as writer:
+        schema = validate_XML(doc)
+        for error in schema.error_log:
+            writer.write(_as_error_dict(error))
+
+        if fallback_schema and len(schema.error_log) == 1 and "No matching global declaration" in schema.error_log[0].message:
+            xmlns = etree.QName(doc.getroot().tag).namespace
+            schema = validate_XML(doc, [u"%s %s"%(xmlns, fallback_schema)])
+            for error in schema.error_log:
+                writer.write(_as_error_dict(error))
 
 def validate_xml_via_schematron(xml_file, schema_file, dst_file):
     schematron = Schematron(file = schema_file,

@@ -13,6 +13,7 @@
       "Parkdaten",
       "Mobility"
     ],
+    "schema": "http://bast.s3.amazonaws.com/schema/1467795733294/ITP_Deutschland_ParkingTable_V_01_00.xsd",
     "creator": {
       "@type": "Organization",
       "name": "Landeshauptstadt Stuttgart"

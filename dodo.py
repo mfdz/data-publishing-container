@@ -45,18 +45,19 @@ def task_download_mdm_dataset():
         }
 
 def task_validate_xml():
-    for (dataset_name, download_url, cert, file_type) in tasks.download_links(DPC_CONFIG['dataset_definitions_dir']+'**/dpc.json'):
-        if file_type != 'xml':
+    for (dataset_name, dpc_def) in tasks.dpcs(DPC_CONFIG['dataset_definitions_dir']+'**/dpc.json'):
+        if dpc_def['fileType'] != 'xml':
             continue
 
         body_file = DPC_CONFIG['out_dir'] + dataset_name + '/body.xml'
         dst_file = DPC_CONFIG['out_dir'] + dataset_name + '/validation_results.schema.jsonl'
+        fallback_schema = dpc_def["ld+json"].get('schema') 
         
         yield {
             'name': dataset_name,
             'file_dep': [body_file],
             'targets': [dst_file],
-            'actions': [(tasks.validate_xml, (body_file, dst_file))]
+            'actions': [(tasks.validate_xml, (body_file, fallback_schema, dst_file))]
         }    
 
 def task_validate_xml_using_schematron():

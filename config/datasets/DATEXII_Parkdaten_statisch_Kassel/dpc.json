@@ -13,6 +13,7 @@
       "Parkdaten",
       "Mobility"
     ],
+    "schema": "http://bast.s3.amazonaws.com/schema/1344950317027/MDM-Profile_ParkingFacilityTable.xsd",
     "creator": {
       "@type": "Organization",
       "name": "Stadt Kassel"
