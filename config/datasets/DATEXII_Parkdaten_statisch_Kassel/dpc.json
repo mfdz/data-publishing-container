@@ -23,7 +23,7 @@
       "name": "Stadt Kassel",
       "geo": {
         "@type": "GeoShape",
-        "box": "9.2560 51.2185 9.6824 51.3945"
+        "box": "51.2185 9.2560 51.3945 9.6824"
       }
     },
     "distribution": [

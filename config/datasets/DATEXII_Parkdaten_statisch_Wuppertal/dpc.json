@@ -23,7 +23,7 @@
       "name": "Stadt Wuppertal",
       "geo": {
         "@type": "GeoShape",
-        "box": "6.9859 51.1570 7.3416 51.3263"
+        "box": "51.1570 6.9859 51.3263 7.3416"
       }
     },
     "distribution": [

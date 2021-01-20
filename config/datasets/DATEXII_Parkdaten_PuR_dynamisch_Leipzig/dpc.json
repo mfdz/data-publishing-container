@@ -24,7 +24,7 @@
       "name": "Stadt Leipzig",
       "geo": {
         "@type": "GeoShape",
-        "box": "12.1639 51.2331 12.6151 51.4532"
+        "box": "51.2331 12.1639 51.4532 12.6151"
       }
     },
     "distribution": [

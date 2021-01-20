@@ -23,7 +23,7 @@
       "name": "Stadt Stuttgart",
       "geo": {
         "@type": "GeoShape",
-        "box": "9.0301 48.7018 9.3549 48.8541"
+        "box": "48.7018 9.0301 48.8541 9.3549"
       }
     },
     "distribution": [
