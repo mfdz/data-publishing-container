@@ -18,11 +18,12 @@ def dpc_files(pattern):
         dataset_name = os.path.basename(os.path.dirname(dpc_file))
         yield (dataset_name, dpc_file)
 
-def _load_linked_data(dpc_file):
+def _load_dpc_file(dpc_file):
     with open(dpc_file, encoding='utf-8') as fc:
-        data = json.load(fc) 
-        # extract ld section
-        return data['ld+json']
+        return json.load(fc) 
+
+def _load_linked_data(dpc_file):
+    return _load_dpc_file(dpc_file)['ld+json']
 
 def _replace_env_vars(value):
     if value and value.startswith('$DPC_'):
@@ -63,9 +64,10 @@ def _format_for(encodingFormat):
     return"unknown"     
 
 
-def _enhanced_linked_data(ld, dataset_name, dpc_host):
+def _enhanced_linked_data(ld, dataset_name, image_url, dpc_host):
     dataset = ld.copy()
-    dataset['image'] = f'https://{dpc_host}/img/data.jpg'
+    print(dataset_name, "image: ", image_url)
+    dataset['image'] = image_url if image_url else  f'https://{dpc_host}/img/data.jpg'
     landing_page = f'https://{dpc_host}/{dataset_name}/index.html'
     dataset['landingPage'] = landing_page
     dataset['datapackageName'] = dataset_name.lower()
@@ -82,9 +84,8 @@ def render_index(basedir, dpc_host, index_file, sitemap_file):
     os.makedirs(os.path.dirname(index_file), exist_ok=True)
     datasets = []
     with open(sitemap_file, 'w', encoding='utf-8') as fh:
-        for (dataset_name, dpc_file) in dpc_files(basedir+'/**/dpc.json'):
-            ld = _load_linked_data(dpc_file)
-            dataset = _enhanced_linked_data(ld, dataset_name, dpc_host)
+        for (dataset_name, dpc_data) in dpcs(basedir+'/**/dpc.json'):
+            dataset = _enhanced_linked_data(dpc_data['ld+json'], dataset_name, dpc_data.get('image'), dpc_host)
             datasets.append(dataset)
             fh.write('{}\n'.format(dataset['landingPage']))
 
@@ -98,7 +99,9 @@ def render_landing_page(dpc_file, dst_file, ld_file, datapackage_file, dataset_n
     '''Render the dataset index page using metadata from supplied dpc file'''
     # Open template file
     template = env.get_template('dataset_template.html')
-    ld = _load_linked_data(dpc_file)
+
+    dpc_data = _load_dpc_file(dpc_file)
+    ld = dpc_data['ld+json']
 
     size = os.path.getsize(validation_results_file)
     validation_ok = True if os.path.getsize(validation_results_file) == 0 else False
@@ -107,7 +110,7 @@ def render_landing_page(dpc_file, dst_file, ld_file, datapackage_file, dataset_n
     rendered_template = template.render(ld = ld, validation_ok = validation_ok, size = size)
 
     datapackage_template = env.get_template('datapackage.json')
-    dataset = _enhanced_linked_data(ld, dataset_name, DPC_CONFIG['host'])
+    dataset = _enhanced_linked_data(ld, dataset_name, dpc_data.get('image'), DPC_CONFIG['host'])
     rendered_dp_template = datapackage_template.render(ld = dataset)
 
     # Write to dest file

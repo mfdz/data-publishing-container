@@ -2,6 +2,7 @@
   "downloadUrl": "https://broker.mdm-portal.de/BASt-MDM-Interface/srv/3774000/clientPullService?subscriptionID=3774000",
   "downloadCert": "$DPC_MDM_CERT",
   "fileType": "xml",
+  "image": "https://data.mfdz.de/img/roadwork.jpg",
   "ld+json": {
     "@context": "http://schema.org",
     "@type": "Dataset",
