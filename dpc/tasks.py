@@ -66,7 +66,6 @@ def _format_for(encodingFormat):
 
 def _enhanced_linked_data(ld, dataset_name, image_url, dpc_host):
     dataset = ld.copy()
-    print(dataset_name, "image: ", image_url)
     dataset['image'] = image_url if image_url else  f'https://{dpc_host}/img/data.jpg'
     landing_page = f'https://{dpc_host}/{dataset_name}/index.html'
     dataset['landingPage'] = landing_page
