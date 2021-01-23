@@ -70,7 +70,7 @@
         </div>
         <div class="column is-8 content">
           <p>{{ ld.description }}<p>
-          <p>Erstellt durch {{ld.creator.name or 'Unbekannt' }}</p>
+          <p>Veröffentlicht durch {{ld.publisher.name or 'Unbekannt' }}</p>
           <ul class="tag-list">{% for keyword in ld.keywords %}
               <li class="tag is-rounded">{{ keyword }}</li>
             {% endfor %}</ul>

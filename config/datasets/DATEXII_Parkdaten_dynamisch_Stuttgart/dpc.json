@@ -15,7 +15,7 @@
       "Mobility"
     ],
     "schema": "http://bast.s3.amazonaws.com/schema/1385369839450/MDM-Profile_ParkingFacilityStatus.xsd",
-    "creator": {
+    "publisher": {
       "@type": "Organization",
       "name": "Landeshauptstadt Stuttgart"
     },

@@ -15,7 +15,7 @@
       "Roadworks"
     ],
     "schema": "http://bast.s3.amazonaws.com/schema/1574850425213/MDM_Datenmodell_Baustellen_04-00-00.xsd",
-    "creator": {
+    "publisher": {
       "@type": "Organization",
       "name": "Straßenverkehrszentrale BW",
       "url": "http://www.svz-bw.de/"
