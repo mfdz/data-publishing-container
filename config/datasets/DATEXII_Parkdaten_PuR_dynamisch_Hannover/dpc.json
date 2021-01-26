@@ -12,6 +12,8 @@
     "keywords": [
       "DATEXII",
       "Park & Ride-Anlagen",
+      "Parken",
+      "Parkdaten",
       "Mobility"
     ],
     "schema": "http://bast.s3.amazonaws.com/schema/1385369839450/MDM-Profile_ParkingFacilityStatus.xsd",

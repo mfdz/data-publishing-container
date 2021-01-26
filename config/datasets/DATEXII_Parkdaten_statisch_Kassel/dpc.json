@@ -11,6 +11,7 @@
     "keywords": [
       "DATEXII",
       "Parkdaten",
+      "Parken",
       "Mobility"
     ],
     "schema": "http://bast.s3.amazonaws.com/schema/1385369955888/MDM-Profile_ParkingFacilityTable.xsd",
