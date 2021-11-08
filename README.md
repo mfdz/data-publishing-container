@@ -51,7 +51,7 @@ With this PoC, we provide standard XML schema validation for MDM parking pubicat
 
 #### Providing datasets in a simpler schema
 
-TBD. We plan to convert DATEXII Parkdaten datasets into the much simpler ParkAPI format, which already is available for about 30 cities. Other use cases might be: conversion of DATEII MDM Arbeitsstellen data to waze's CIFS format.
+TBD. We plan to convert DATEXII Parkdaten datasets into the much simpler ParkAPI format, which already is available for about 30 cities. Other use cases might be: conversion of DATEII MDM Arbeitsstellen data to [Waze's CIFS format](https://developers.google.com/waze/data-feed/feed-setup).
 
 #### Improving dataset quality
 
