@@ -6,6 +6,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from .schemavalidator import validate_XML
 from lxml.isoschematron import Schematron
 import jsonlines
+import logging
 
 env = Environment(
     loader=FileSystemLoader('config/templates'),
@@ -135,41 +136,47 @@ def _as_error_dict(error):
             }
 
 def validate_xml(xml_file, fallback_schema, dst_file):
-    doc = etree.parse(xml_file)
+    try:
+        doc = etree.parse(xml_file)
 
-    with jsonlines.open(dst_file, mode='w') as writer:
-        schema = validate_XML(doc)
-        for error in schema.error_log:
-            writer.write(_as_error_dict(error))
-
-        if fallback_schema and len(schema.error_log) == 1 and "No matching global declaration" in schema.error_log[0].message:
-            xmlns = etree.QName(doc.getroot().tag).namespace
-            schema = validate_XML(doc, [u"%s %s"%(xmlns, fallback_schema)])
+        with jsonlines.open(dst_file, mode='w') as writer:
+            schema = validate_XML(doc)
             for error in schema.error_log:
                 writer.write(_as_error_dict(error))
 
+            if fallback_schema and len(schema.error_log) == 1 and "No matching global declaration" in schema.error_log[0].message:
+                xmlns = etree.QName(doc.getroot().tag).namespace
+                schema = validate_XML(doc, [u"%s %s"%(xmlns, fallback_schema)])
+                for error in schema.error_log:
+                    writer.write(_as_error_dict(error))
+    except:
+        logging.error("Error parsing %s", validate_xml)
+
 def validate_xml_via_schematron(xml_file, schema_file, dst_file):
-    schematron = Schematron(file = schema_file,
-        error_finder=Schematron.ASSERTS_AND_REPORTS)
-    doc = etree.parse(xml_file)
-    valid = schematron.validate(doc)
+    try:
+        schematron = Schematron(file = schema_file,
+            error_finder=Schematron.ASSERTS_AND_REPORTS)
+        doc = etree.parse(xml_file)
+        valid = schematron.validate(doc)
 
-    ns = {'svrl': 'http://purl.oclc.org/dsdl/svrl'}
+        ns = {'svrl': 'http://purl.oclc.org/dsdl/svrl'}
 
-    with jsonlines.open(dst_file, mode='w') as writer:
-        for error in schematron.error_log:
-            msg_xml = etree.fromstring(error.message)
-            message = msg_xml.find('svrl:text', ns).text if msg_xml.find('svrl:text', ns) is not None else None
+        with jsonlines.open(dst_file, mode='w') as writer:
+            for error in schematron.error_log:
+                msg_xml = etree.fromstring(error.message)
+                message = msg_xml.find('svrl:text', ns).text if msg_xml.find('svrl:text', ns) is not None else None
 
-            error_dict = {
-                'line': error.line, 
-                'column': error.column,
-                'level': error.level_name,
-                'message': message,
-                'domain_name': error.domain_name,
-                'type_name': error.type_name
-            }
-            writer.write(error_dict)
+                error_dict = {
+                    'line': error.line, 
+                    'column': error.column,
+                    'level': error.level_name,
+                    'message': message,
+                    'domain_name': error.domain_name,
+                    'type_name': error.type_name
+                }
+                writer.write(error_dict)
+    except:
+        logging.error("Error parsing %s", validate_xml)
    
 def merge_validation_results(validation_files, dst_file):
     with open(dst_file, 'w') as fh:
