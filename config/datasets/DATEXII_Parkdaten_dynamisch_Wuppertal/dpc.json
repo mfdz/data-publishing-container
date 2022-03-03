@@ -15,7 +15,7 @@
       "Parken",
       "Mobility"
     ],
-    "schema": "http://bast.s3.amazonaws.com/schema/1385369839450/MDM-Profile_ParkingFacilityStatus.xsd",
+    "schema": "http://bast.s3.amazonaws.com/schema/1344949840616/MDM-Profile_ParkingFacilityStatus.xsd",
     "publisher": {
       "@type": "Organization",
       "name": "Stadt Wuppertal"

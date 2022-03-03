@@ -14,7 +14,7 @@
       "Parken",
       "Mobility"
     ],
-    "schema": "http://bast.s3.amazonaws.com/schema/1467795733294/ITP_Deutschland_ParkingTable_V_01_00.xsd",
+    "schema": "https://bast-prod.s3.eu-central-1.amazonaws.com/schema/1612882016194/MDM-Profile_ParkingFacilityTable.xsd",
     "publisher": {
       "@type": "Organization",
       "name": "Landeshauptstadt Stuttgart"
