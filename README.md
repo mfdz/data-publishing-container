@@ -37,6 +37,7 @@ This project provides a simple prototype implementation. It demonstrates the fol
 4) Providing transformed datasets in a different, probably simpler, schema (TBD)
 5) Providing quality improvements for low quality datasets (TBD)
 6) Enhancing datasets by combining them with additional data
+7) Publishing a dataset provided externally
 
 #### Liberation of inaccessible datasets
 The German [Mobilitäts Daten Marktplatz (MDM)]() is a government data portal for (mostly) road traffic related datasets and services. While many datasets in general are available free of charge, accessing them requires multiple registration steps and explicit license confirmation. Using this Data Publihing Container, we liberate them, using a registered account to download them and republish them as accessible datasets.
@@ -61,9 +62,12 @@ TBD
 
 TBD
 
+### Publishing a dataset provided externally
+The German Marktstammdatenregister tracks every energy plant in Germany, including photovoltaic installations. The data itself (some of it anonymized) is available under an open data license. However, the complete database export is outdated and chunked in multiple files. The API, on the other hand, is paginated and allows to download 5000 records per request, which results in more than 4500 necessary requests. Via a weekly cronjob using [wattbewerb-mastr-db](https://github.com/wattbewerb/wattbewerb-mastr-db), the csv is retrieved and pulished.
+
 ## Credits
-Many of the ideas cited above are inspired by the way [qri](https://qri.io) handles data: evenry dataset resides in a body file, which is accompanied by a set of metadata files (meta.json and structure.json) which describe the data. On qri.io, every dataset has proper landing page, describing metadata and stats of the dataset. And every dataset has an issue tracker.
-qri uses IPFS to distribute datasets, provides version management, sql like query functionality and many features more, so you might want to consider to publish your datasets using qri. Publishing your dataset to qri might be an additonal step in your process chain.
+Many of the ideas cited above are inspired by the way [qri](https://qri.io) handles data: every dataset resides in a body file, which is accompanied by a set of metadata files (meta.json and structure.json) which describe the data.
+
 
 ## How to use this project
 1) describe the datasets via a dpc.json file
@@ -80,7 +84,10 @@ $ pip install -r requirements.txt
 ``` 
 
 #### Running via local python
- run doit
+Just run 
+```sh
+$ doit
+```
 
 ### To run via docker
 

@@ -1,0 +1,38 @@
+{
+  "fileType": "zip",
+  "image": "https://data.mfdz.de/img/photovoltaic.jpg",
+  "ld+json": {
+    "@context": "http://schema.org",
+    "@type": "Dataset",
+    "name": "Markstammdatenregister",
+    "description": "Extrakt des Markstammdatenregisters der Bundesnetzagentur",
+    "keywords": [
+      "BNetzA",
+      "MaStR",
+      "Markstammdatenregister",
+      "Photovoltaik"
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Bundesnetzagentur",
+      "url": "https://www.marktstammdatenregister.de/"
+    },
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": "Deutschland",
+      "geo": {
+        "@type": "GeoShape",
+        "box": "47.3024876979 5.98865807458 54.98310415349 15.0169958839"
+      }
+    },
+    "distribution": [
+      {
+        "@type":"DataDownload",
+        "name": "Datensatz",
+        "contentUrl": "body.zip",
+        "encodingFormat": "application/zip"
+      }],
+    "license": "https://www.govdata.de/dl-de/by-2-0",
+    "creditText": "© Bundesnetzagentur, <a href='https://www.govdata.de/dl-de/by-2-0'>Datenlizenz Deutschland -Namensnennung- Version 2.0</a>"
+  }
+}

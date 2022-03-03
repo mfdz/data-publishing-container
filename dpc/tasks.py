@@ -38,7 +38,8 @@ def dpcs(pattern):
     
 def download_links(pattern):
     for (dataset_name, data) in dpcs(pattern):
-        yield (dataset_name, data['downloadUrl'], data.get('downloadCert'), data['fileType'])
+        if data.get('downloadUrl'):
+            yield (dataset_name, data['downloadUrl'], data.get('downloadCert'), data['fileType'])
 
 def datasets_with_schematron_validation(pattern):
     for (dataset_name, dpc_file) in dpc_files(pattern):
@@ -61,7 +62,9 @@ def _format_for(encodingFormat):
         return "xml"
     elif encodingFormat == "application/json":
         return "json"
-    return"unknown"     
+    elif encodingFormat == "application/zip":
+        return "zip"
+    return "unknown"
 
 
 def _enhanced_linked_data(ld, dataset_name, image_url, dpc_host):
