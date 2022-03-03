@@ -1,0 +1,44 @@
+{
+  "fileType": "zip",
+  "image": "https://data.mfdz.de/img/data.jpg",
+  "ld+json": {
+    "@context": "http://schema.org",
+    "@type": "Dataset",
+    "name": "Destatis Unfallatlas",
+    "description": "Dieser Datensatz stellt die zusammengeführten, vereinheitlichten Veröffentlichungen 2016-2020 des Unfallatlas Deutschland bereit, die vom Statistischen Bundesamt (destatis) als jahresweise CSV-Dateien publiziert werden.",
+    "keywords": [
+      "destatis",
+      "Unfalldaten",
+      "Straßenverkehr",
+      "Getötete Personen",
+      "Verletzte Personen",
+      "Straßenverkehr",
+      "Unfall",
+      "Verkehrsunfall",
+      "Unfallstatistik"
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Statistisches Bundesamt",
+      "url": "https://www.destatis.de/"
+    },
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": "Deutschland",
+      "geo": {
+        "@type": "GeoShape",
+        "box": "47.3024876979 5.98865807458 54.98310415349 15.0169958839"
+      }
+    },
+    "temporalCoverage": "2016/2020",
+    "distribution": [
+      {
+        "@type":"DataDownload",
+        "name": "Datensatz",
+        "contentUrl": "body.zip",
+        "encodingFormat": "application/zip"
+      }],
+    "license": "https://www.govdata.de/dl-de/by-2-0",
+    "creditText": "© Statistische Ämter des Bundes und der Länder"
+  }
+}
