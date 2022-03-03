@@ -106,7 +106,7 @@ def render_landing_page(dpc_file, dst_file, ld_file, datapackage_file, dataset_n
     validation_ok = True if os.path.getsize(validation_results_file) == 0 else False
     
     # render template with ld supplied as params
-    rendered_template = template.render(ld = ld, validation_ok = validation_ok, size = size)
+    rendered_template = template.render(ld = ld, image_url=dpc_data.get('image'), validation_ok = validation_ok, size = size)
 
     datapackage_template = env.get_template('datapackage.json')
     dataset = _enhanced_linked_data(ld, dataset_name, dpc_data.get('image'), DPC_CONFIG['host'])
