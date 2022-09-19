@@ -1,11 +1,11 @@
 {
   "fileType": "zip",
-  "image": "https://data.mfdz.de/img/data.jpg",
+  "image": "https://data.mfdz.de/img/ghostbike.jpg",
   "ld+json": {
     "@context": "http://schema.org",
     "@type": "Dataset",
     "name": "Destatis Unfallatlas",
-    "description": "Dieser Datensatz stellt die zusammengeführten, vereinheitlichten Veröffentlichungen 2016-2020 des Unfallatlas Deutschland bereit, die vom Statistischen Bundesamt (destatis) als jahresweise CSV-Dateien publiziert werden.",
+    "description": "Dieser Datensatz stellt die zusammengeführten, vereinheitlichten Veröffentlichungen seit 2016 des Unfallatlas Deutschland bereit, die vom Statistischen Bundesamt (destatis) als jahresweise CSV-Dateien publiziert werden.",
     "keywords": [
       "destatis",
       "Unfalldaten",
@@ -30,7 +30,7 @@
         "box": "47.3024876979 5.98865807458 54.98310415349 15.0169958839"
       }
     },
-    "temporalCoverage": "2016/2020",
+    "temporalCoverage": "2016/2021",
     "distribution": [
       {
         "@type":"DataDownload",
