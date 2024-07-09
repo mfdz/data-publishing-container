@@ -67,7 +67,7 @@ def _format_for(encodingFormat):
     # FIXME this is temporary and should be replaced, e.g. by using datapackage's format metainfo
     if encodingFormat == "text/csv":
         return "csv"
-    elif encodingFormat == "text/xml":
+    elif encodingFormat == "text/xml" or encodingFormat == "application/xml":
         return "xml"
     elif encodingFormat == "application/json":
         return "json"
