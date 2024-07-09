@@ -1,5 +1,5 @@
 {
-  "downloadUrl": "https://broker.mdm-portal.de/BASt-MDM-Interface/srv/3774000/clientPullService?subscriptionID=3774000",
+  "downloadUrl": "https://mobilithek.info:8443/mobilithek/api/v1.0/subscription/620201005696323584/clientPullService?subscriptionID=620201005696323584",
   "downloadCert": "$DPC_MDM_CERT",
   "fileType": "xml",
   "image": "https://data.mfdz.de/img/roadwork.jpg",
@@ -8,13 +8,13 @@
     "@type": "Dataset",
     "name": "Arbeitsstellen BW-SVZ",
     "description": "Geplante und aktuelle Arbeitsstellen kürzerer oder längerer Dauer auf 2-bahnigen Autobahnen oder Bundesstraßen sowie klassifizierten Landes- und Kreisstraßen in Baden-Württemberg",
-    "sameAs": "https://service.mdm-portal.de/mdm-portal-application/publDetail.do?publicationId=2883000",
+    "sameAs": "https://mobilithek.info/offers/110000000002883000",
     "keywords": [
       "DATEXII",
       "Arbeitsstellen",
       "Roadworks"
     ],
-    "schema": "http://bast.s3.amazonaws.com/schema/1574850425213/MDM_Datenmodell_Baustellen_04-00-00.xsd",
+    "schema": "https://mobilithek.info/mdp-api/files/aux/schemas/DATEX_2/Profile_Road_Works/MDM_Datenmodell_Baustellen_04-00-00.xsd",
     "publisher": {
       "@type": "Organization",
       "name": "Straßenverkehrszentrale BW",
@@ -33,7 +33,7 @@
         "@type":"DataDownload",
         "name": "Datensatz",
         "contentUrl": "body.xml",
-        "encodingFormat": "text/xml"
+        "encodingFormat": "application/xml"
       }]
   }
 }
