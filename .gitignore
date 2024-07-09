@@ -3,3 +3,4 @@ out/
 __pycache__
 todos.md
 .doit.db
+tmp/
