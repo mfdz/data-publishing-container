@@ -30,13 +30,19 @@
         "box": "47.3024876979 5.98865807458 54.98310415349 15.0169958839"
       }
     },
-    "temporalCoverage": "2016/2021",
+    "temporalCoverage": "2016/2023",
     "distribution": [
       {
         "@type":"DataDownload",
         "name": "Datensatz",
         "contentUrl": "body.zip",
         "encodingFormat": "application/zip"
+      },
+      {
+        "@type":"DataDownload",
+        "name": "Datensatz",
+        "contentUrl": "body.parquet",
+        "encodingFormat": "application/vnd.apache.parquet"
       }],
     "license": "https://www.govdata.de/dl-de/by-2-0",
     "creditText": "© Statistische Ämter des Bundes und der Länder"
