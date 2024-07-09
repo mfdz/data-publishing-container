@@ -17,6 +17,10 @@ env = Environment(
     autoescape=select_autoescape([ 'xml'])
 )
 
+opener = urllib.request.build_opener()
+opener.addheaders = [('User-agent', 'data-publishing-container/0.1')]
+urllib.request.install_opener(opener)
+
 def dpc_files(pattern):
     LIST = glob.glob(pattern, recursive = True)
     for dpc_file in LIST:
