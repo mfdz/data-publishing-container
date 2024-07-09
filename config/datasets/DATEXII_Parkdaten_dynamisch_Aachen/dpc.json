@@ -1,0 +1,38 @@
+{
+  "downloadUrl": "https://mobilithek.info:8443/mobilithek/api/v1.0/subscription/615525934700564480/clientPullService?subscriptionID=615525934700564480",
+  "downloadCert": "$DPC_MDM_CERT",
+  "fileType": "xml",
+  "ld+json": {
+    "@context": "http://schema.org",
+    "@type": "Dataset",
+    "name": "Parkdaten dynamisch Aachen",
+    "description": "Dynamische Daten (Lage, Name, Anzahl Stellplätze, Tarife, Einfahrtshöhe) zu den Parkierungsanlagen aus dem Parkleitsystem der Stadt Aachen.",
+    "sameAs": "https://mobilithek.info/offers/110000000003300000",
+    "keywords": [
+      "DATEXII",
+      "Parkdaten",
+      "Parken",
+      "Mobility"
+    ],
+    "schema": "https://mobilithek.info/mdp-api/files/aux/schemas/DATEX_2/Profile_Intelligent_Truck_Parking_Site/ITP_Deutschland_ParkingTable.xsd",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Stadt Aachen"
+    },
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": "Städteregion Aachen (DEA2D)",
+      "geo": {
+        "@type": "GeoShape",
+        "box": "---"
+      }
+    },
+    "distribution": [
+      {
+        "@type":"DataDownload",
+        "name": "Datensatz",
+        "contentUrl": "body.xml",
+        "encodingFormat": "application/xml"
+      }]
+  }
+}

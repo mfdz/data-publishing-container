@@ -1,0 +1,38 @@
+{
+  "downloadUrl": "https://mobilithek.info:8443/mobilithek/api/v1.0/subscription/708858343914889216/clientPullService?subscriptionID=708858343914889216 ",
+  "downloadCert": "$DPC_MDM_CERT",
+  "fileType": "xml",
+  "ld+json": {
+    "@context": "http://schema.org",
+    "@type": "Dataset",
+    "name": "Baustellen Stadt Aachen",
+    "description": "Tagesaktueller Überblick über Baustellen und andere Verkehrsbehinderungen der Stadt Aachen. Dieser Datensatz umfasst die Standorte der amtlich erfassten Straßenbaustellen in Aachen mit Informationen zur genauen Lage, zu Art und Grund der Maßnahme, zu Beginn und Ende der Maßnahme sowie etwaigen Bemerkungen.",
+    "sameAs": "https://mobilithek.info/offers/110000000003179001",
+    "keywords": [
+      "DATEXII",
+      "Parkdaten",
+      "Parken",
+      "Mobility"
+    ],
+    "schema": "https://mobilithek.info/mdp-api/files/aux/schemas/MDM_CONTAINER/Version_1.2/20110617_containermodel_schema.xsd",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Stadt Aachen"
+    },
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": "Städteregion Aachen (DEA2D)",
+      "geo": {
+        "@type": "GeoShape",
+        "box": "---"
+      }
+    },
+    "distribution": [
+      {
+        "@type":"DataDownload",
+        "name": "Datensatz",
+        "contentUrl": "body.xml",
+        "encodingFormat": "application/xml"
+      }]
+  }
+}
