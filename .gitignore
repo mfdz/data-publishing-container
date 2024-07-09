@@ -4,3 +4,4 @@ __pycache__
 todos.md
 .doit.db
 tmp/
+.schema_cache/

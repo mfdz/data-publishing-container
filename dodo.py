@@ -58,7 +58,7 @@ def task_validate_xml():
             'name': dataset_name,
             'file_dep': [body_file],
             'targets': [dst_file],
-            'actions': [(tasks.validate_xml, (body_file, fallback_schema, dst_file))]
+            'actions': [(tasks.validate_xml, (body_file, fallback_schema, dst_file, '.schema_cache'))]
         }    
 
 def task_validate_xml_using_schematron():

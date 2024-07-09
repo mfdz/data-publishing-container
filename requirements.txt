@@ -3,3 +3,4 @@ Jinja2==2.11.2
 jsonlines==2.0.0
 lxml==4.6.2
 schedule==0.6.0
+markupsafe==2.0.1

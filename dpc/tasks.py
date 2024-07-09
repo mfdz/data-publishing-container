@@ -1,12 +1,16 @@
 import glob
 import json
 import os
+import os.path
 from lxml import etree
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from .schemavalidator import validate_XML
 from lxml.isoschematron import Schematron
 import jsonlines
 import logging
+import urllib.request
+import tempfile
+import hashlib
 
 env = Environment(
     loader=FileSystemLoader('config/templates'),
@@ -135,20 +139,30 @@ def _as_error_dict(error):
                 'type_name': error.type_name
             }
 
-def validate_xml(xml_file, fallback_schema, dst_file):
+def _download_and_cache(fallback_schema, schema_cache_dir):
+    os.makedirs(schema_cache_dir, exist_ok=True)
+    file_name = hashlib.md5(fallback_schema.encode()).hexdigest()+'.xsd'
+    cached_file_path = os.path.join(schema_cache_dir, file_name)
+    urllib.request.urlretrieve(fallback_schema, cached_file_path)
+    return cached_file_path
+
+def validate_xml(xml_file, fallback_schema, dst_file, schema_cache_dir):
     try:
         doc = etree.parse(xml_file)
 
         with jsonlines.open(dst_file, mode='w') as writer:
             schema = validate_XML(doc)
-            for error in schema.error_log:
-                writer.write(_as_error_dict(error))
-
+            
             if fallback_schema and len(schema.error_log) == 1 and "No matching global declaration" in schema.error_log[0].message:
                 xmlns = etree.QName(doc.getroot().tag).namespace
-                schema = validate_XML(doc, [u"%s %s"%(xmlns, fallback_schema)])
+                cached_fallback_schema = _download_and_cache(fallback_schema, schema_cache_dir)
+                schema = validate_XML(doc, [u"%s %s"%(xmlns, cached_fallback_schema)])
                 for error in schema.error_log:
                     writer.write(_as_error_dict(error))
+            else:
+                for error in schema.error_log:
+                    writer.write(_as_error_dict(error))
+
     except:
         logging.error("Error parsing %s", validate_xml)
 
