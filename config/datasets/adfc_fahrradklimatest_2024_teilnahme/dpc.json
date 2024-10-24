@@ -1,0 +1,41 @@
+{
+  "fileType": "topojson",
+  "image": "https://data.mfdz.de/img/adfc_fkt_2024.png",
+  "ld+json": {
+    "@context": "http://schema.org",
+    "@type": "Dataset",
+    "name": "ADFC Fahrradklima-Test 2024 Teilnahmezahlen",
+    "description": "Dieser Datensatz stellt die Anzahl der Teilnahmezahlen je Gemeinde bzw. die noch bis zu einer Berücksichtigung in der Gesamtauswertung fehlenden als Karte dar. Kartengrundlage und Einwohnerzahlen basieren auf Daten des BKG.",
+    "keywords": [
+      "Radverkehr",
+      "Fahrradklima-Test",
+      "Fahrradklima",
+      "Fahrradinfrastruktur",
+      "Straßenverkehr"
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Allgemeiner Deutscher Fahrrad-Club e. V.",
+      "url": "https://adfc.de/"
+    },
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": "Deutschland",
+      "geo": {
+        "@type": "GeoShape",
+        "box": "47.3024876979 5.98865807458 54.98310415349 15.0169958839"
+      }
+    },
+    "temporalCoverage": "2024",
+    "distribution": [
+      {
+        "@type":"DataDownload",
+        "name": "Datensatz",
+        "contentUrl": "body.topojson",
+        "encodingFormat": "application/json"
+      }
+    ],
+    "license": "https://www.govdata.de/dl-de/by-2-0",
+    "creditText": "ADFC, Geobasisdaten: Geobasis-DE / BKG 2024"
+  }
+}
