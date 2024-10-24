@@ -2,6 +2,7 @@
   "downloadUrl": "https://mobilithek.info:8443/mobilithek/api/v1.0/subscription/615525934700564480/clientPullService?subscriptionID=615525934700564480",
   "downloadCert": "$DPC_MDM_CERT",
   "fileType": "xml",
+  "image": "https://data.mfdz.de/img/parken.jpg",
   "ld+json": {
     "@context": "http://schema.org",
     "@type": "Dataset",
