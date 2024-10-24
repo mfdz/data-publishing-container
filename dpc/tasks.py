@@ -199,6 +199,8 @@ def validate_xml_via_schematron(xml_file, schema_file, dst_file):
 def merge_validation_results(validation_files, dst_file):
     with open(dst_file, 'w') as fh:
         for in_file in validation_files:
+            if not os.path.isfile(in_file):
+                continue
             # read row by row, collect only n samples of same category and count rest, write them out as result file
             with open(in_file, 'r') as rh:
                 for line in rh:
